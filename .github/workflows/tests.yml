@@ -1,23 +1,31 @@
 name: python-tests
 
+
 on:
-  push:
-  pull_request:
+  push:                
+  pull_request:        
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
+
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # TODO (ЛАБА): здесь специально нет установки pytest,
-      # поэтому Actions будет красный. Исправь это.
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+          # Если есть requirements.txt, можно раскомментировать:
+          # pip install -r requirements.txt
+
 
       - name: Run tests
         run: |
